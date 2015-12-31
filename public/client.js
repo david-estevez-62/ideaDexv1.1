@@ -5,6 +5,7 @@ $(document).ready(function(){
 	// };
 
 
+
 ////////////////////////////
 // SignUp Page Validation //
 ////////////////////////////
@@ -12,33 +13,47 @@ $(document).ready(function(){
 	// $('.createacct').on('click', function(e){
 	// 	e.preventDefault();
 
-	// 	console.log('hi');
-
 	// 	var username = $('.loginusername').val();
+	// 	console.log(username)
 
 	// 	var password1 = $('.loginpassword1').val();
 	// 	var password2 = $('.loginpassword2').val();
 
-	// 	if(password1 === password2){
 
-	// 		$.post('/signup', {username:username, password1:password1} , function(data){
+		// if(password1.length > 0 || password2.length > 0){
+		// 	$('.status').val() = "typing";
+		// } else {
+		// 	console.log('do nothing')
+		// }
 
-	// 			console.log(data)
+
+		// console.log('hi');
+
+		// var username = $('.loginusername').val();
+		// console.log(username)
+
+		// var password1 = $('.loginpassword1').val();
+		// var password2 = $('.loginpassword2').val();
+
+		// if(password1 === password2){
+
+		// 	$.post('/signup', {username:username, password1:password1} , function(data){
+
+		// 		console.log(data)
 					
-	// 		});
+		// 	});
 
-	// 		$('.loginusername').val('');
-	// 		$('.loginpassword1').val('');
-	// 		$('.loginpassword2').val('');
+		// 	$('.loginusername').val('');
+		// 	$('.loginpassword1').val('');
+		// 	$('.loginpassword2').val('');
 
-	// 	}
-	// 	else {
-	// 		$('#signup').append('<p>passwords dont match up.</p>')
-	// 	}
+		// }
+		// else {
+		// 	$('#signup').append('<p>passwords dont match up.</p>')
+		// }
+		// 
 
-
-	// })
-
+	})
 
 
 
