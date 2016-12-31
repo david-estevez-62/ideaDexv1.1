@@ -68,7 +68,9 @@ var adminController = {
       // database or a password mismatch, set a flash variable to show the error
       // which will be read and used in the "login" handler above and then redirect
       // to that handler.
+      
       if(!user) {
+
         req.flash('error', 'Error logging in. Please try again.');
         return res.redirect('/login');
       }
@@ -111,7 +113,6 @@ var adminController = {
       // email: req.body.email
     });
 
-    console.log(user)
 
     // Now that the user is created, we'll attempt to save them to the
     // database.
@@ -130,6 +131,8 @@ var adminController = {
         // failed to validate on this object.
         if(err.code === 11000){
           errorMessage = 'This user already exists.';
+          req.flash('error', errorMessage);
+          return res.redirect('/login');
         }
 
         // Flash the message and redirect to the login view to

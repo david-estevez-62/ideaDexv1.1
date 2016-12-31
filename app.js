@@ -23,7 +23,7 @@ var postController = require('./controllers/post');
 var uploadsController = require('./controllers/uploads.js');
 
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/ideanote');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/ideanetwork');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
@@ -86,7 +86,6 @@ app.use(multer({
 
 
 
-
 // Our get request for viewing the login page
 app.get('/login', adminController.login);
 
@@ -130,7 +129,7 @@ app.use(passportConfig.isLoggedIn);
 // Passing in ideas in res.render allows use to have access to ideas in jade
 //
 app.get('/:username/home', function (req, res) {
-  console.log(req.cookies)
+
   var posts = req.user.posts.reverse();
   // console.log(posts)
 
@@ -462,6 +461,6 @@ app.post('/uploadProfilepic', function(req, res){
 // Otherwise use our own local port.
 // var port = process.env.PORT || 6591;
 // var server = app.listen(port, function(){})
-var server = app.listen(process.env.PORT || 6591, function () {
+var server = app.listen(process.env.PORT || 3350, function () {
   console.log('Express server listening on port ' + server.address().port);
 });

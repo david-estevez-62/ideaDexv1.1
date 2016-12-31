@@ -32,38 +32,38 @@ passport.deserializeUser(function(id, done){
 });
 
 
-// var localSignUp = new LocalStrategy({
-//   passReqToCallback: true
-// },
-//   function(req, username, password, next){
+var localSignUp = new LocalStrategy({
+  passReqToCallback: true
+},
+  function(req, username, password, next){
 
-//     // Look for user in the database with the same username
-//     User.findOne({ 'local.username' : username}, function(err, user){
-//       if (err) return next(err);
+    // Look for user in the database with the same username
+    User.findOne({ 'local.username' : username}, function(err, user){
+      if (err) return next(err);
 
-//       // If the user already exists, return false
-//       if (user){
-//         return next(null, false, req.flash('signUpError', 'That username is taken.'));
-//       }
-//       // Otherwise, create a new user 
-//       else {
-//         var newUser = new User();
+      // If the user already exists, return false
+      if (user){
+        return next(null, false, req.flash('signUpError', 'That username is taken.'));
+      }
+      // Otherwise, create a new user 
+      else {
+        var newUser = new User();
         
-//         newUser.generateHash(password, function(err, hash){
+        newUser.generateHash(password, function(err, hash){
 
-//           newUser.local.password = hash;
-//           newUser.local.username = username;
+          newUser.local.password = hash;
+          newUser.local.username = username;
 
-//           // Save the user
-//           newUser.save(function(err){
-//             if (err) throw err;
-//             return next(null, newUser);
-//           });
-//         });  
-//       }
-//     });
-//   }
-// );
+          // Save the user
+          newUser.save(function(err){
+            if (err) throw err;
+            return next(null, newUser);
+          });
+        });  
+      }
+    });
+  }
+);
 
 // LOCAL SIGNIN 
 var localSignIn = new LocalStrategy({
@@ -72,7 +72,7 @@ var localSignIn = new LocalStrategy({
   function(req, username, password, next){
 
     // Check to see if user is in the database
-    User.findOne({'username':username}, function(err, user){
+    User.findOne({username:username}, function(err, user){
 
       ////////////////////////////
       // console.log(arguments) //
@@ -86,7 +86,7 @@ var localSignIn = new LocalStrategy({
       }
 
       user.comparePassword(password, function(err, isMatch){
-
+        console.log(isMatch)
       ////////////////////////////
       // console.log(arguments) //
       ////////////////////////////
@@ -109,7 +109,7 @@ var localSignIn = new LocalStrategy({
 
 // Passport needs to know about our strategy definition above, so
 // we hook that in here.
-// passport.use('localSignUp', localSignUp);
+passport.use('localSignUp', localSignUp);
 passport.use('localSignIn', localSignIn);
 
 

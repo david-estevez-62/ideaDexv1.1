@@ -26,8 +26,7 @@ var userSchema = mongoose.Schema({
         contents: [],
         _id: {
             type: String,
-            unique: true,
-            'default': shortid.generate
+            default: shortid.generate
         },
         username: String,
         date: {type:Date, default:Date()},
@@ -95,8 +94,10 @@ userSchema.pre('save', function(next){
  */
 userSchema.methods.comparePassword = function(candidatePassword, next){
   // Use bcrypt to compare the unencrypted value to the encrypted one in the DB
+  console.log(this.password);
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch){
     // If there was an error, allow execution to move to the next middleware
+    console.log(candidatePassword);
     if(err) return next(err);
 
     // If there is no error, move to the next middleware and inform
@@ -105,8 +106,13 @@ userSchema.methods.comparePassword = function(candidatePassword, next){
   });
 };
 
+
+
 // Our user model
 var User = mongoose.model('user', userSchema);
 
 // Make user model available through exports/require
 module.exports = User;
+
+
+
